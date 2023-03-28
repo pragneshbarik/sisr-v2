@@ -1,0 +1,850 @@
+23-03-20 09:37:10.971 - INFO:   name: KAIST_x4
+  suffix: None
+  model: sr
+  scale: 4
+  gpu_ids: [0]
+  datasets:[
+    test_1:[
+      name: set5
+      mode: LR
+      dataroot_LR: /media/ml/Data Disk/NTIRE2023/SISR/DIV2K_test_LR_bicubic_X4/DIV2K_test_LR_bicubic/X4
+      phase: test
+      scale: 4
+      data_type: img
+    ]
+  ]
+  path:[
+    root: /media/ml/Data Disk/NTIRE2023/SISR/try_1_elu
+    pretrain_model_G: /media/ml/Data Disk/NTIRE2023/SISR/try_1_elu/experiments/try_1_elu_pretrain/models/98000_G.pth
+    results_root: /media/ml/Data Disk/NTIRE2023/SISR/try_1_elu/results/KAIST_x4
+    log: /media/ml/Data Disk/NTIRE2023/SISR/try_1_elu/results/KAIST_x4
+  ]
+  network_G:[
+    which_model_G: sr_resnet
+    norm_type: None
+    mode: CNA
+    nf: 64
+    nb: 16
+    no_bb: 3
+    no_cb: 5
+    in_nc: 3
+    out_nc: 3
+    gc: 32
+    group: 1
+    scale: 4
+  ]
+  is_train: False
+
+23-03-20 09:37:10.972 - INFO: Dataset [LRDataset - set5] is created.
+23-03-20 09:37:10.972 - INFO: Number of test images in [set5]: 100
+23-03-20 09:37:13.279 - INFO: Loading pretrained model for G [/media/ml/Data Disk/NTIRE2023/SISR/try_1_elu/experiments/try_1_elu_pretrain/models/98000_G.pth] ...
+23-03-20 09:37:13.364 - INFO: Network G structure: DataParallel - ProposedNetwork, with parameters: 14,615,839
+23-03-20 09:37:13.365 - INFO: ProposedNetwork(
+  (model): MyNetwork(
+    (k5): Sequential(
+      (0): Conv2d(3, 64, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+      (1): ELU(alpha=1.0)
+    )
+    (cb): CB(
+      (fwd_bb): ModuleList(
+        (0): BB(
+          (uk3_1): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (uk3_2): Sequential(
+            (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (uk3_3): Sequential(
+            (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_1): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_2): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_3): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (k1): Sequential(
+            (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (emha): EMHA(
+            (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+            (attend): Softmax(dim=-1)
+            (toQKV): Linear(in_features=288, out_features=864, bias=False)
+            (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+          )
+          (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+          (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+        )
+        (1): BB(
+          (uk3_1): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (uk3_2): Sequential(
+            (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (uk3_3): Sequential(
+            (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_1): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_2): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_3): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (k1): Sequential(
+            (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (emha): EMHA(
+            (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+            (attend): Softmax(dim=-1)
+            (toQKV): Linear(in_features=288, out_features=864, bias=False)
+            (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+          )
+          (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+          (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+        )
+        (2): BB(
+          (uk3_1): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (uk3_2): Sequential(
+            (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (uk3_3): Sequential(
+            (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_1): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_2): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (lk3_3): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (k1): Sequential(
+            (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+            (1): ELU(alpha=1.0)
+          )
+          (emha): EMHA(
+            (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+            (attend): Softmax(dim=-1)
+            (toQKV): Linear(in_features=288, out_features=864, bias=False)
+            (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+          )
+          (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+          (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+        )
+      )
+      (fwd_cam): ModuleList(
+        (0): CAM(
+          (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (fc1): Linear(in_features=64, out_features=4, bias=True)
+          (fc2): Linear(in_features=4, out_features=64, bias=True)
+        )
+        (1): CAM(
+          (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (fc1): Linear(in_features=64, out_features=4, bias=True)
+          (fc2): Linear(in_features=4, out_features=64, bias=True)
+        )
+        (2): CAM(
+          (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (fc1): Linear(in_features=64, out_features=4, bias=True)
+          (fc2): Linear(in_features=4, out_features=64, bias=True)
+        )
+      )
+    )
+    (fwd_cb): ModuleList(
+      (0): CB(
+        (fwd_bb): ModuleList(
+          (0): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (1): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (2): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+        )
+        (fwd_cam): ModuleList(
+          (0): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (1): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (2): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+        )
+      )
+      (1): CB(
+        (fwd_bb): ModuleList(
+          (0): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (1): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (2): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+        )
+        (fwd_cam): ModuleList(
+          (0): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (1): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (2): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+        )
+      )
+      (2): CB(
+        (fwd_bb): ModuleList(
+          (0): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (1): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (2): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+        )
+        (fwd_cam): ModuleList(
+          (0): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (1): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (2): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+        )
+      )
+      (3): CB(
+        (fwd_bb): ModuleList(
+          (0): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (1): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+          (2): BB(
+            (uk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_2): Sequential(
+              (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (uk3_3): Sequential(
+              (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_1): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_2): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (lk3_3): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (k1): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+              (1): ELU(alpha=1.0)
+            )
+            (emha): EMHA(
+              (reduction): Conv1d(576, 288, kernel_size=(1,), stride=(1,))
+              (attend): Softmax(dim=-1)
+              (toQKV): Linear(in_features=288, out_features=864, bias=False)
+              (expansion): Conv1d(288, 576, kernel_size=(1,), stride=(1,))
+            )
+            (norm): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+            (unFold): Unfold(kernel_size=(3, 3), dilation=1, padding=1, stride=1)
+          )
+        )
+        (fwd_cam): ModuleList(
+          (0): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (1): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+          (2): CAM(
+            (global_avg_pool): AdaptiveAvgPool2d(output_size=1)
+            (fc1): Linear(in_features=64, out_features=4, bias=True)
+            (fc2): Linear(in_features=4, out_features=64, bias=True)
+          )
+        )
+      )
+    )
+    (ub): Upsample(scale_factor=4.0, mode=nearest)
+    (u): OurUpSample(
+      (U1): Sequential(
+        (0): Conv2d(64, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): PixelShuffle(upscale_factor=4)
+        (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (3): ReLU()
+      )
+      (co1): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+        (1): ELU(alpha=1.0)
+      )
+    )
+    (k3): Sequential(
+      (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ELU(alpha=1.0)
+    )
+    (k3_1): Sequential(
+      (0): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): ELU(alpha=1.0)
+    )
+  )
+)
+23-03-20 09:37:13.365 - INFO: Model [SRModel] is created.
+23-03-20 09:37:13.365 - INFO: 
+Testing [set5]...
+23-03-20 09:37:14.004 - INFO: 0901x4
+23-03-20 09:37:14.531 - INFO: 0902x4
+23-03-20 09:37:15.137 - INFO: 0903x4
+23-03-20 09:37:15.745 - INFO: 0904x4
+23-03-20 09:37:16.280 - INFO: 0905x4
+23-03-20 09:37:16.849 - INFO: 0906x4
+23-03-20 09:37:17.460 - INFO: 0907x4
+23-03-20 09:37:18.007 - INFO: 0908x4
+23-03-20 09:37:18.570 - INFO: 0909x4
+23-03-20 09:37:19.133 - INFO: 0910x4
+23-03-20 09:37:19.665 - INFO: 0911x4
+23-03-20 09:37:20.092 - INFO: 0912x4
+23-03-20 09:37:20.638 - INFO: 0913x4
+23-03-20 09:37:21.086 - INFO: 0914x4
+23-03-20 09:37:21.622 - INFO: 0915x4
+23-03-20 09:37:22.144 - INFO: 0916x4
+23-03-20 09:37:22.689 - INFO: 0917x4
+23-03-20 09:37:23.218 - INFO: 0918x4
+23-03-20 09:37:23.751 - INFO: 0919x4
+23-03-20 09:37:24.311 - INFO: 0920x4
+23-03-20 09:37:24.849 - INFO: 0921x4
+23-03-20 09:37:25.402 - INFO: 0922x4
+23-03-20 09:37:26.050 - INFO: 0923x4
+23-03-20 09:37:26.604 - INFO: 0924x4
+23-03-20 09:37:27.165 - INFO: 0925x4
+23-03-20 09:37:27.510 - INFO: 0926x4
+23-03-20 09:37:27.916 - INFO: 0927x4
+23-03-20 09:37:28.477 - INFO: 0928x4
+23-03-20 09:37:29.035 - INFO: 0929x4
+23-03-20 09:37:29.569 - INFO: 0930x4
+23-03-20 09:37:30.109 - INFO: 0931x4
+23-03-20 09:37:30.660 - INFO: 0932x4
+23-03-20 09:37:31.164 - INFO: 0933x4
+23-03-20 09:37:31.725 - INFO: 0934x4
+23-03-20 09:37:32.259 - INFO: 0935x4
+23-03-20 09:37:32.850 - INFO: 0936x4
+23-03-20 09:37:33.383 - INFO: 0937x4
+23-03-20 09:37:33.941 - INFO: 0938x4
+23-03-20 09:37:34.479 - INFO: 0939x4
+23-03-20 09:37:34.992 - INFO: 0940x4
+23-03-20 09:37:35.600 - INFO: 0941x4
+23-03-20 09:37:36.173 - INFO: 0942x4
+23-03-20 09:37:36.755 - INFO: 0943x4
+23-03-20 09:37:37.297 - INFO: 0944x4
+23-03-20 09:37:37.962 - INFO: 0945x4
+23-03-20 09:37:38.525 - INFO: 0946x4
+23-03-20 09:37:38.948 - INFO: 0947x4
+23-03-20 09:37:39.530 - INFO: 0948x4
+23-03-20 09:37:40.075 - INFO: 0949x4
+23-03-20 09:37:40.626 - INFO: 0950x4
+23-03-20 09:37:41.217 - INFO: 0951x4
+23-03-20 09:37:41.774 - INFO: 0952x4
+23-03-20 09:37:42.350 - INFO: 0953x4
+23-03-20 09:37:42.905 - INFO: 0954x4
+23-03-20 09:37:43.452 - INFO: 0955x4
+23-03-20 09:37:43.997 - INFO: 0956x4
+23-03-20 09:37:44.589 - INFO: 0957x4
+23-03-20 09:37:45.150 - INFO: 0958x4
+23-03-20 09:37:45.681 - INFO: 0959x4
+23-03-20 09:37:46.330 - INFO: 0960x4
+23-03-20 09:37:46.877 - INFO: 0961x4
+23-03-20 09:37:47.417 - INFO: 0962x4
+23-03-20 09:37:47.962 - INFO: 0963x4
+23-03-20 09:37:48.434 - INFO: 0964x4
+23-03-20 09:37:48.954 - INFO: 0965x4
+23-03-20 09:37:49.516 - INFO: 0966x4
+23-03-20 09:37:50.025 - INFO: 0967x4
+23-03-20 09:37:50.535 - INFO: 0968x4
+23-03-20 09:37:50.965 - INFO: 0969x4
+23-03-20 09:37:51.573 - INFO: 0970x4
+23-03-20 09:37:52.126 - INFO: 0971x4
+23-03-20 09:37:52.681 - INFO: 0972x4
+23-03-20 09:37:53.244 - INFO: 0973x4
+23-03-20 09:37:53.712 - INFO: 0974x4
+23-03-20 09:37:54.281 - INFO: 0975x4
+23-03-20 09:37:54.842 - INFO: 0976x4
+23-03-20 09:37:55.410 - INFO: 0977x4
+23-03-20 09:37:55.920 - INFO: 0978x4
+23-03-20 09:37:56.463 - INFO: 0979x4
+23-03-20 09:37:57.018 - INFO: 0980x4
+23-03-20 09:37:57.839 - INFO: 0981x4
+23-03-20 09:37:58.352 - INFO: 0982x4
+23-03-20 09:37:58.910 - INFO: 0983x4
+23-03-20 09:37:59.386 - INFO: 0984x4
+23-03-20 09:37:59.930 - INFO: 0985x4
+23-03-20 09:38:00.556 - INFO: 0986x4
+23-03-20 09:38:01.090 - INFO: 0987x4
+23-03-20 09:38:01.631 - INFO: 0988x4
+23-03-20 09:38:02.174 - INFO: 0989x4
+23-03-20 09:38:02.722 - INFO: 0990x4
+23-03-20 09:38:03.380 - INFO: 0991x4
+23-03-20 09:38:03.929 - INFO: 0992x4
+23-03-20 09:38:04.344 - INFO: 0993x4
+23-03-20 09:38:04.908 - INFO: 0994x4
+23-03-20 09:38:05.531 - INFO: 0995x4
+23-03-20 09:38:06.187 - INFO: 0996x4
+23-03-20 09:38:06.698 - INFO: 0997x4
+23-03-20 09:38:07.269 - INFO: 0998x4
+23-03-20 09:38:07.840 - INFO: 0999x4
+23-03-20 09:38:08.417 - INFO: 1000x4

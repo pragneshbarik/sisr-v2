@@ -1,0 +1,8 @@
+###Follow the instructions to reproduce the results...
+
+Step 1 :  check necessary packages in amrutha.yml file
+Step 2 : Change the directories (dataroot_LR, root, Pretrain_model_G) in options/test/test_SRResNet.json file and provide pretrain model path (path of 98000._G.pth) given in Code folder.
+(if you are using HR images with LR images then change MODE in LRHR in test_SRResNet.json file)
+Step 3 : In terminal write Conda activate < env name >
+Step 4 : run the command, 
+	 python test.py -opt options/test/test_SRResNet.json 
